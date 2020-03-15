@@ -56,6 +56,21 @@
             font-size:1em;
 
         }
+
+
+        .bomb{
+            position:absolute;
+            left:0px;
+            top:0px;
+            width:35px;
+            height:35px;
+            border-radius:50%;
+            color:white;
+            background-color:black;
+            text-align:center;
+            font-size:2em;
+
+        }
     </style>
 </head>
 <body>
@@ -130,6 +145,7 @@
 
         player.inplay = true;
         player.score = 2000;
+        player.totalBomb = 2;
         player.plane = document.createElement("div")
         player.plane.setAttribute('class','plane');
         gameArea.appendChild(player.plane);
@@ -163,6 +179,33 @@
        }
 
 
+    // make bomb function
+
+
+    function makeBomb(){
+        console.log("making")
+
+        if(player.inplay){
+
+            player.score -= 300;
+            player.activeBomb++;
+
+            let bomb = document.createElement("div");
+
+            bomb.classList.add("bomb");
+
+            bomb.innerHTML = player.activeBomb;
+            
+            bomb.y = player.y;
+            bomb.x = player.x;
+
+            bomb.style.left =bomb.x + "px";
+            bomb.style.top = bomn.y + "px"
+
+            gameArea.appendChild(" bomb")
+        }
+    }
+
 
 
 
@@ -170,6 +213,12 @@
 
            if(player.inplay){
                console.log(keys);
+
+            if(keys.space){
+
+                makeBomb();
+
+            }
 
             
            // directions true
