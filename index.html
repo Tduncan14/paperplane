@@ -32,6 +32,30 @@
             background-color:aliceblue;
             font-size:2em;
         }
+
+
+        .score{
+            background-color:black;
+            height:70px;
+            text-align:center;
+            color:white;
+            font-size:1.5em;
+            font-family:fantasy;
+
+        }
+
+
+        .base{
+            position:absolute;
+            bottom:0px;
+            width:50px;
+            height:100px;
+            color:white;
+            background-color:black;
+            text-align:center;
+            font-size:1em;
+
+        }
     </style>
 </head>
 <body>
@@ -39,7 +63,7 @@
         Press to start
     </span>
 
-    <div class="score"></div>
+    <div class="score">0</div>
 
     <div  class="gameArea">
 
@@ -101,6 +125,8 @@
 
         if(!player.inplay){
 
+            makeEnemy();
+
 
         player.inplay = true;
         player.score = 2000;
@@ -116,6 +142,30 @@
 
        }
 
+       // Make enemy game
+
+       function makeEnemy(){
+
+           player.base = document.createElement('div');
+
+           player.base.setAttribute('class','base');
+
+
+           player.base.style.width = Math.floor(Math.random()*200)+10+"px";
+
+
+           player.base.style.height = Math.floor(Math.random()*100)+100+"px";
+
+           player.base.style.left = Math.floor(Math.random()*(gameArea.offsetWidth -200)) +100;
+
+           gameArea.appendChild(player.base);
+
+       }
+
+
+
+
+
        function playGame(){
 
            if(player.inplay){
@@ -123,7 +173,7 @@
 
             
            // directions true
-               if(keys.ArrowUp && player.y > 0){
+               if(keys.ArrowUp && player.y > 80){
 
                    player.y -= player.speed
 
@@ -148,6 +198,15 @@
                    player.score -= 100;
                }
 
+               player.score--
+               // make sure score doesn't go beneath zero.
+
+               if(player.score < 0) {
+                
+                  player.score = 0;
+
+               }
+
                player.plane.style.left = player.x +"px";
 
                player.plane.style.top = player.y + "px";
@@ -156,6 +215,9 @@
             //    directions ends
                window.
                requestAnimationFrame(playGame);
+
+
+               score.innerHTML = player.score;
            }
 
 
