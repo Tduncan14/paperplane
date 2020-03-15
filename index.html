@@ -146,6 +146,7 @@
         player.inplay = true;
         player.score = 2000;
         player.totalBomb = 2;
+        player.ready = true;
         player.plane = document.createElement("div")
         player.plane.setAttribute('class','plane');
         gameArea.appendChild(player.plane);
@@ -185,7 +186,7 @@
     function makeBomb(){
         console.log("making")
 
-        if(player.inplay){
+        if(player.ready){
 
             player.score -= 300;
             player.activeBomb++;
@@ -200,9 +201,15 @@
             bomb.x = player.x;
 
             bomb.style.left =bomb.x + "px";
-            bomb.style.top = bomn.y + "px"
+            bomb.style.top = bomb.y + "px"
 
-            gameArea.appendChild(" bomb")
+            gameArea.appendChild(bomb);
+
+            player.ready = false;
+
+            setTimeout(function(){
+                player.ready = true;
+            },500)
         }
     }
 
